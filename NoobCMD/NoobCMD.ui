@@ -64,7 +64,11 @@
     </layout>
    </item>
    <item>
-    <widget class="QTextEdit" name="TXT_Report"/>
+    <widget class="QTextEdit" name="TXT_Report">
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+    </widget>
    </item>
   </layout>
  </widget>

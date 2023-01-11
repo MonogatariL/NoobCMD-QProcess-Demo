@@ -5,6 +5,8 @@
 #include <QTextCodec>
 #include <QDebug>
 #include <QTextStream>
+#include<qkeyeventtransition.h>
+#include<qevent.h>
 
 #include "ui_NoobCMD.h"
 
@@ -17,14 +19,20 @@ public:
     ~NoobCMD();
     void init();
 private slots:
+    /*QProcess–≈∫≈*/
     void Slot_AfterProcStarted();
     void Slot_AfterProcFinished(int exitCode, QProcess::ExitStatus);
-    void Slot_RightMessage();
-    void Slot_WrongMessage();
+    void Slot_RightMessage();// show right message
+    void Slot_WrongMessage();// show wrong message
 
     void Slot_Process();
+    void Slot_CtrlC();
+protected:
+    bool eventFilter(QObject* obj, QEvent* event);
+    void keyPressEvent(QKeyEvent* event);
 private:
     Ui::NoobCMDClass ui;
 
+    QString CurrenPath;
     QProcess* proc;
 };
