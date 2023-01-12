@@ -5,10 +5,10 @@
 #include <QTextCodec>
 #include <QDebug>
 #include <QTextStream>
-#include<qkeyeventtransition.h>
 #include<qevent.h>
 
 #include "ui_NoobCMD.h"
+#include "LineEditModify.h"
 
 class NoobCMD : public QWidget
 {
@@ -17,6 +17,7 @@ class NoobCMD : public QWidget
 public:
     NoobCMD(QWidget *parent = nullptr);
     ~NoobCMD();
+private:
     void init();
 private slots:
     /*QProcess–≈∫≈*/
@@ -35,4 +36,5 @@ private:
 
     QString CurrenPath;
     QProcess* proc;
+    bool isProcessEnable;
 };

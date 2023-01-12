@@ -1,7 +1,8 @@
 #include "NoobCMD.h"
 
 NoobCMD::NoobCMD(QWidget* parent) :
-     QWidget(parent)
+    QWidget(parent),
+    isProcessEnable(true)
 {
     ui.setupUi(this);
     init();
@@ -20,23 +21,21 @@ void NoobCMD::init()
     connect(proc, &QProcess::started, this, &NoobCMD::Slot_AfterProcStarted);
     connect(proc, static_cast<void (QProcess::*)(int, QProcess::ExitStatus)>(&QProcess::finished), this, &NoobCMD::Slot_AfterProcFinished);
 
-    connect(ui.PB_Process, &QPushButton::clicked, this, &NoobCMD::Slot_Process);
-    connect(ui.PB_CtrlC, &QPushButton::clicked, this, &NoobCMD::Slot_CtrlC);
+    //connect(ui.PB_Process, &QPushButton::clicked, this, &NoobCMD::Slot_Process);
+    //connect(ui.PB_CtrlC, &QPushButton::clicked, this, &NoobCMD::Slot_CtrlC);
 
-    QObject::installEventFilter(this);//注册事件过滤器
-    //QObject::installEventFilter(ui.LE_Command);
-
-    QLineEdit;
+    //QObject::installEventFilter(this);//注册事件过滤器
+    //this->installEventFilter(ui.LE_Command);
 
     CurrenPath = QApplication::applicationDirPath();
 }
 
 void NoobCMD::Slot_Process()
 {
-    if (ui.PB_Process->isEnabled() == false)
+    if (!isProcessEnable)
         return;
-    //ui.TXT_Report->clear();
     proc->start(QString(ui.LE_Command->text()));
+    ui.LE_Command->clear();
 }
 
 void NoobCMD::Slot_CtrlC()
@@ -44,16 +43,19 @@ void NoobCMD::Slot_CtrlC()
     proc->close(); 
     proc->start("BREAK");
     ui.TXT_Report->append(CurrenPath);
+    ui.TXT_Report->moveCursor(QTextCursor::End);
 }
 
 void NoobCMD::Slot_AfterProcStarted()
 {
-    ui.PB_Process->setDisabled(true);
+    isProcessEnable = false;
+    ui.LE_Command->setReadOnly(true);
 }
 
 void NoobCMD::Slot_AfterProcFinished(int exitCode, QProcess::ExitStatus exitStatus)
 {
-    ui.PB_Process->setEnabled(true);
+    isProcessEnable = true;
+    ui.LE_Command->setReadOnly(false);
     proc->close();
 }
 
@@ -83,8 +85,6 @@ bool NoobCMD::eventFilter(QObject* obj, QEvent* event)
 {
     if (obj==ui.LE_Command)
     {
-        int a = 5;
-        a = 3;
         if (event->type() == QEvent::KeyPress)
         {
             QKeyEvent* keyEvent = static_cast<QKeyEvent*>(event);//将事件转化为键盘事件
@@ -106,8 +106,22 @@ bool NoobCMD::eventFilter(QObject* obj, QEvent* event)
 
 void NoobCMD::keyPressEvent(QKeyEvent* event)
 {
-    if (event->key() == Qt::Key_C)
+    if (event->modifiers() == Qt::ControlModifier)
     {
-        Slot_CtrlC();
+        switch (event->key())
+        {
+        case Qt::Key_C: Slot_CtrlC(); break;
+        case Qt::Key_L: ui.TXT_Report->clear(); break;
+        default:break;
+        }
+    }
+    else
+    {
+        switch (event->key())
+        {
+        case Qt::Key_Return:
+        case Qt::Key_Enter: Slot_Process(); break;
+        default:break;
+        }
     }
 }

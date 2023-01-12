@@ -14,55 +14,9 @@
    <string>NoobCMD</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
-   <item>
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
-      <widget class="QLabel" name="label">
-       <property name="text">
-        <string>Command :</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLineEdit" name="LE_Command">
-       <property name="text">
-        <string>ping 127.0.0.1</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_3">
-     <item>
-      <spacer name="horizontalSpacer">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item>
-      <widget class="QPushButton" name="PB_CtrlC">
-       <property name="text">
-        <string>Ctrl+C</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="PB_Process">
-       <property name="text">
-        <string>Process</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
+   <property name="spacing">
+    <number>0</number>
+   </property>
    <item>
     <widget class="QTextEdit" name="TXT_Report">
      <property name="readOnly">
@@ -70,9 +24,27 @@
      </property>
     </widget>
    </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="LineEditModify" name="LE_Command">
+       <property name="text">
+        <string>ping 127.0.0.1</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
   </layout>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>LineEditModify</class>
+   <extends>QLineEdit</extends>
+   <header>lineeditmodify.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="NoobCMD.qrc"/>
  </resources>
