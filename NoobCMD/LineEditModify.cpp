@@ -18,6 +18,11 @@ LineEditModify::~LineEditModify()
 
 void LineEditModify::keyPressEvent(QKeyEvent* event)
 {
+    if (event->key() == Qt::Key_Backspace)
+    {
+        if (text().size() < currentPath)
+            return;
+    }
     QLineEdit::keyPressEvent(event);//执行
     event->ignore();//输出后，才将继续执行主窗口的keypressEvent事件
 }

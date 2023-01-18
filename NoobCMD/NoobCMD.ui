@@ -26,10 +26,13 @@
    </item>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
+     <property name="spacing">
+      <number>0</number>
+     </property>
      <item>
       <widget class="LineEditModify" name="LE_Command">
        <property name="text">
-        <string>ping 127.0.0.1</string>
+        <string/>
        </property>
       </widget>
      </item>

@@ -10,6 +10,7 @@ public:
 	LineEditModify(QWidget *parent);
 	~LineEditModify();
 	//bool event(QEvent* event);
+	QString currentPath;
 protected:
 	void keyPressEvent(QKeyEvent* event);
 };

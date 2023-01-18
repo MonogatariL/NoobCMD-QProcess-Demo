@@ -21,12 +21,6 @@ void NoobCMD::init()
     connect(proc, &QProcess::started, this, &NoobCMD::Slot_AfterProcStarted);
     connect(proc, static_cast<void (QProcess::*)(int, QProcess::ExitStatus)>(&QProcess::finished), this, &NoobCMD::Slot_AfterProcFinished);
 
-    //connect(ui.PB_Process, &QPushButton::clicked, this, &NoobCMD::Slot_Process);
-    //connect(ui.PB_CtrlC, &QPushButton::clicked, this, &NoobCMD::Slot_CtrlC);
-
-    //QObject::installEventFilter(this);//×¢²áÊÂ¼þ¹ýÂËÆ÷
-    //this->installEventFilter(ui.LE_Command);
-
     CurrenPath = QApplication::applicationDirPath();
 }
 
@@ -36,13 +30,13 @@ void NoobCMD::Slot_Process()
         return;
     proc->start(QString(ui.LE_Command->text()));
     ui.LE_Command->clear();
+    
 }
 
 void NoobCMD::Slot_CtrlC()
 {
     proc->close(); 
-    proc->start("BREAK");
-    ui.TXT_Report->append(CurrenPath);
+    proc->start("break");
     ui.TXT_Report->moveCursor(QTextCursor::End);
 }
 
@@ -112,6 +106,7 @@ void NoobCMD::keyPressEvent(QKeyEvent* event)
         {
         case Qt::Key_C: Slot_CtrlC(); break;
         case Qt::Key_L: ui.TXT_Report->clear(); break;
+        case Qt::Key_M:ui.LE_Command->setText(proc->program()); break;
         default:break;
         }
     }
