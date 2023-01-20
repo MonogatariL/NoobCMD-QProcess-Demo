@@ -9,6 +9,7 @@
 
 #include "ui_NoobCMD.h"
 #include "LineEditModify.h"
+#include "ControlStrip.h"
 
 class NoobCMD : public QWidget
 {
@@ -18,7 +19,7 @@ public:
     NoobCMD(QWidget *parent = nullptr);
     ~NoobCMD();
 private:
-    void init();
+    void Init();
 private slots:
     /*QProcess–≈∫≈*/
     void Slot_AfterProcStarted();
@@ -27,9 +28,9 @@ private slots:
     void Slot_WrongMessage();// show wrong message
 
     void Slot_Process();
+    void Slot_Process(QString);
     void Slot_CtrlC();
 protected:
-    bool eventFilter(QObject* obj, QEvent* event);
     void keyPressEvent(QKeyEvent* event);
 private:
     Ui::NoobCMDClass ui;

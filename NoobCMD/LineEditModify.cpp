@@ -1,26 +1,24 @@
 #include "LineEditModify.h"
 
-LineEditModify::LineEditModify(QWidget *parent)
-	: QLineEdit(parent)
-{}
+LineEditModify::LineEditModify(QWidget* parent)
+    : QLineEdit(parent)
+{
+    
+}
 
 LineEditModify::~LineEditModify()
 {}
 
-//bool LineEditModify::event(QEvent * event)
-//{
-//    if (event->type() == QEvent::KeyPress)
-//    {
-//        qDebug() << tr("mylineEdit的event函数已经触发");
-//    }
-//    return QLineEdit::event(event);//执行QlineEdit类的event函数的默认操作
-//}
+void LineEditModify::setModOpen(LE_Modify mod, bool value)
+{
+    Mod[mod] = value;
+}
 
 void LineEditModify::keyPressEvent(QKeyEvent* event)
 {
     if (event->key() == Qt::Key_Backspace)
     {
-        if (text().size() < currentPath)
+        if (Mod[LE_Modify::CmdCurrentPath]&&text().size() < currentPath)
             return;
     }
     QLineEdit::keyPressEvent(event);//执行

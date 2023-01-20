@@ -43,10 +43,30 @@
     <ClCompile Include="LineEditModify.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ControlStrip.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OrderBlock.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="LineEditModify.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="ControlStrip.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="OrderBlock.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <QtUic Include="ControlStrip.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="OrderBlock.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
   </ItemGroup>
 </Project>

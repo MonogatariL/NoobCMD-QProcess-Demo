@@ -5,7 +5,7 @@ NoobCMD::NoobCMD(QWidget* parent) :
     isProcessEnable(true)
 {
     ui.setupUi(this);
-    init();
+    Init();
 }
 
 NoobCMD::~NoobCMD()
@@ -13,14 +13,18 @@ NoobCMD::~NoobCMD()
 
 }
 
-void NoobCMD::init()
+void NoobCMD::Init()
 {
+    /*QProcess*/
     proc = new QProcess();
     connect(proc, &QProcess::readyReadStandardOutput, this, &NoobCMD::Slot_RightMessage);
     connect(proc, &QProcess::readyReadStandardError, this, &NoobCMD::Slot_WrongMessage);
     connect(proc, &QProcess::started, this, &NoobCMD::Slot_AfterProcStarted);
     connect(proc, static_cast<void (QProcess::*)(int, QProcess::ExitStatus)>(&QProcess::finished), this, &NoobCMD::Slot_AfterProcFinished);
+    /*ControlStrip*/
+    connect(ui.Wid_ControlStrip, &ControlStrip::Sgl_SendOrder, this, [=](QString Order) {Slot_Process(Order); });
 
+    ui.LE_Command->setModOpen(LE_Modify::CmdCurrentPath,true);
     CurrenPath = QApplication::applicationDirPath();
 }
 
@@ -30,7 +34,14 @@ void NoobCMD::Slot_Process()
         return;
     proc->start(QString(ui.LE_Command->text()));
     ui.LE_Command->clear();
-    
+}
+
+void NoobCMD::Slot_Process(QString Order)
+{
+    if (!isProcessEnable)
+        return;
+    proc->start(Order);
+    ui.LE_Command->clear();
 }
 
 void NoobCMD::Slot_CtrlC()
@@ -73,29 +84,6 @@ void NoobCMD::Slot_WrongMessage()
 
     ui.TXT_Report->setTextColor(Qt::red);
     ui.TXT_Report->append(str);
-}
-
-bool NoobCMD::eventFilter(QObject* obj, QEvent* event)
-{
-    if (obj==ui.LE_Command)
-    {
-        if (event->type() == QEvent::KeyPress)
-        {
-            QKeyEvent* keyEvent = static_cast<QKeyEvent*>(event);//将事件转化为键盘事件
-            switch(keyEvent->key())
-            {
-                case Qt::Key_Return:
-                case Qt::Key_Enter : Slot_Process();break;
-                case Qt::ControlModifier: {
-                    if (keyEvent->modifiers() == Qt::ControlModifier && keyEvent->key() == Qt::Key_C)
-                        Slot_CtrlC();
-                    break;
-                }
-            }
-        }
-    }
-    //其余事件由系统来处理
-    return QObject::eventFilter(obj, event);
 }
 
 void NoobCMD::keyPressEvent(QKeyEvent* event)

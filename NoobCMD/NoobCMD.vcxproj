@@ -85,15 +85,25 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="OrderBlock.cpp" />
     <QtRcc Include="NoobCMD.qrc" />
+    <QtUic Include="ControlStrip.ui" />
     <QtUic Include="NoobCMD.ui" />
     <QtMoc Include="NoobCMD.h" />
+    <ClCompile Include="ControlStrip.cpp" />
     <ClCompile Include="LineEditModify.cpp" />
     <ClCompile Include="NoobCMD.cpp" />
     <ClCompile Include="main.cpp" />
+    <QtUic Include="OrderBlock.ui" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="LineEditModify.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="ControlStrip.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="OrderBlock.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
