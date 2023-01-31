@@ -1,5 +1,7 @@
 #pragma once
-
+/*
+修改后的LineEdit，主要用于释放键盘事件信号
+*/
 #include <QLineEdit>
 #include <qevent.h>
 #include <qdebug.h>

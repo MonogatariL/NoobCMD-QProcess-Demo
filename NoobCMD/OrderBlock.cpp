@@ -35,15 +35,17 @@ void OrderBlock::Slot_SendOrder()
 
 void OrderBlock::Slot_DeleteYes()
 {
-	ui.PB_Delete->show();
 	ui.frame->hide();
+	ui.PB_Delete->show();
 	emit Sgl_DeleteBlock();
 }
 
 void OrderBlock::Slot_DeleteNo()
 {
-	ui.PB_Delete->show();
 	ui.frame->hide();
+	ui.PB_Delete->show();
+
+
 }
 
 void OrderBlock::Slot_DeleteBlock()

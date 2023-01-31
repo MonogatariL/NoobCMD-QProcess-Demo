@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>300</width>
+    <width>320</width>
     <height>45</height>
    </rect>
   </property>
@@ -154,12 +154,6 @@ line-height: 60px;</string>
      <property name="styleSheet">
       <string notr="true">border:1px solid 
 rgb(0, 170, 255);</string>
-     </property>
-     <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout">
       <property name="spacing">

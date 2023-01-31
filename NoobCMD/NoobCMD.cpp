@@ -10,7 +10,6 @@ NoobCMD::NoobCMD(QWidget* parent) :
 
 NoobCMD::~NoobCMD()
 {
-
 }
 
 void NoobCMD::Init()
