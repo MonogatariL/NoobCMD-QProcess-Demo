@@ -23,6 +23,7 @@ void NoobCMD::Init()
     /*ControlStrip*/
     connect(ui.Wid_ControlStrip, &ControlStrip::Sgl_SendOrder, this, [=](QString Order) {Slot_Process(Order); });
 
+
     ui.LE_Command->setModOpen(LE_Modify::CmdCurrentPath,true);
     CurrenPath = QApplication::applicationDirPath();
 }
